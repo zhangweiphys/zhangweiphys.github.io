@@ -1,215 +1,1915 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>扬州慢·疏落新斜 | Papaya's 词驿</title><meta name="author" content="Papaya Z"><meta name="copyright" content="Papaya Z"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="疏落新斜，银台初照，寒宫哪知迢遥。 乍霜节沥沥，还暖露潇潇。 随望处、醉卧浅野，云游天水，月渡星桥。 四野寂，风溅林语，玉下檐梢。  片字千言，但匆匆、雨暮风朝。 问桥下流影，何处倾伞，几点星寥。 意马无端捉摸，飞将去，心猿何扰。 筹尽也，清夜词好，难寄帷宵。  2023.10 上海"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://papaya-z.github.io/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E6%89%AC%E5%B7%9E%E6%85%A2%C2%B7%E7%96%8F%E8%90%BD%E6%96%B0%E6%96%9C.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '天',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '扬州慢·疏落新斜',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2024-03-06 23:15:09'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zhangweiphys - Physics Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@300;400;600;700;800&family=Roboto+Mono:wght@100;300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
-
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
+        :root {
+            --accent-blue: #3898ec;
+            --accent-purple: #7b61ff;
+            --accent-pink: #ff61dc;
         }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+
+        html {
+            scroll-behavior: smooth;
         }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-      }
-      const t = saveToLocal.get('theme')
-    
-        if (t === 'dark') activateDarkMode()
-        else if (t === 'light') activateLightMode()
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Papaya's 词驿" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/br.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Papaya's 词驿"><span class="site-name">Papaya's 词驿</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">扬州慢·疏落新斜</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-15T15:19:17.000Z" title="发表于 2023-10-15 23:19:17">2023-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-06T15:15:09.017Z" title="更新于 2024-03-06 23:15:09">2024-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%97%E8%AF%8D%E9%9B%86/">诗词集</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/">词</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">102</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="扬州慢·疏落新斜"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E6%89%AC%E5%B7%9E%E6%85%A2%C2%B7%E7%96%8F%E8%90%BD%E6%96%B0%E6%96%9C.html#post-comment"><span class="gitalk-comment-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
-<p>疏落新斜，银台初照，寒宫哪知迢遥。</p>
-<p>乍霜节沥沥，还暖露潇潇。</p>
-<p>随望处、醉卧浅野，云游天水，月渡星桥。</p>
-<p>四野寂，风溅林语，玉下檐梢。</p>
-<p><br></p>
-<p>片字千言，但匆匆、雨暮风朝。</p>
-<p>问桥下流影，何处倾伞，几点星寥。</p>
-<p>意马无端捉摸，飞将去，心猿何扰。</p>
-<p>筹尽也，清夜词好，难寄帷宵。</p>
-<p><br></p>
-<p>2023.10 上海</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://papaya-z.github.io">Papaya Z</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://papaya-z.github.io/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E6%89%AC%E5%B7%9E%E6%85%A2%C2%B7%E7%96%8F%E8%90%BD%E6%96%B0%E6%96%9C.html">https://papaya-z.github.io/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E6%89%AC%E5%B7%9E%E6%85%A2%C2%B7%E7%96%8F%E8%90%BD%E6%96%B0%E6%96%9C.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://papaya-z.github.io" target="_blank">Papaya's 词驿</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%8D/">词</a></div><div class="post_share"><div class="social-share" data-image="/img/br.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/Cohen/QM-Cohen-15.html" title="Cohen量子力学Chap.15：全同粒子的产生和湮灭算符"><img class="cover" src="/img/QM.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cohen量子力学Chap.15：全同粒子的产生和湮灭算符</div></div></a></div><div class="next-post pull-right"><a href="/post/Cohen/QM-Cohen-2.1.html" title="Cohen量子力学Chap.2补充材料"><img class="cover" src="/img/QM.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Cohen量子力学Chap.2补充材料</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E5%B0%91%E5%B9%B4%E6%B8%B8.html" title="少年游"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-02</div><div class="title">少年游</div></div></a></div><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E4%B8%B4%E6%B1%9F%E4%BB%99%C2%B7%E5%80%9A%E9%A9%BB%E6%9F%B3%E7%9C%A0%E8%8A%B1%E6%B9%BF%E5%A4%84.html" title="临江仙·倚驻柳眠花湿处"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-13</div><div class="title">临江仙·倚驻柳眠花湿处</div></div></a></div><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E4%B8%B4%E6%B1%9F%E4%BB%99%C2%B7%E6%99%9A%E4%B8%8A%E5%87%BA%E6%9D%A5%E8%A7%85%E9%A3%9F%E9%9B%A8%E4%B8%9D%E7%BB%86%E5%A6%82%E7%B2%89%E8%A2%AB%E7%99%BD%E7%8C%AB%E6%89%91%E4%BA%86%E4%B8%AA%E6%BB%A1%E6%80%80.html" title="临江仙·晚上出来觅食雨丝细如粉被白猫扑了个满怀"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-10</div><div class="title">临江仙·晚上出来觅食雨丝细如粉被白猫扑了个满怀</div></div></a></div><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E8%8E%BA%E5%95%BC%E5%BA%8F%C2%B7%E4%BA%8C%E3%80%87%E4%BA%8C%E4%B8%89.html" title="莺啼序 · 二〇二三年末填慢词长调"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-31</div><div class="title">莺啼序 · 二〇二三年末填慢词长调</div></div></a></div><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E6%99%9A%E7%99%BB%E6%A5%BC.html" title="晚登楼"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-25</div><div class="title">晚登楼</div></div></a></div><div><a href="/post/%E8%AF%97%E8%AF%8D%E9%9B%86/%E8%AF%8D/%E9%B9%8A%E6%A1%A5%E4%BB%99%C2%B7%E6%8F%8F%E9%AC%93%E7%94%BB%E7%9C%89.html" title="鹊桥仙·描鬓画眉"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-08</div><div class="title">鹊桥仙·描鬓画眉</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/br.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Papaya Z</div><div class="author-info__description">See as much as possible, <br>go as far as could.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不定期失踪ing</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/Kardar/%5BKardar%5DV.2-C.4-%E6%A0%87%E5%BA%A6%E5%81%87%E8%AE%BE.html" title="[Kardar]V.2-C.4-标度假设"><img src="/img/Mtheory.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[Kardar]V.2-C.4-标度假设"/></a><div class="content"><a class="title" href="/post/Kardar/%5BKardar%5DV.2-C.4-%E6%A0%87%E5%BA%A6%E5%81%87%E8%AE%BE.html" title="[Kardar]V.2-C.4-标度假设">[Kardar]V.2-C.4-标度假设</a><time datetime="2024-04-27T20:42:02.000Z" title="发表于 2024-04-28 04:42:02">2024-04-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/Kardar/%5BKardar%5DV.2-C.3-%E6%95%A3%E5%B0%84%E5%92%8C%E6%B6%A8%E8%90%BD.html" title="[Kardar]V.2-C.3-散射和涨落"><img src="/img/Mtheory.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[Kardar]V.2-C.3-散射和涨落"/></a><div class="content"><a class="title" href="/post/Kardar/%5BKardar%5DV.2-C.3-%E6%95%A3%E5%B0%84%E5%92%8C%E6%B6%A8%E8%90%BD.html" title="[Kardar]V.2-C.3-散射和涨落">[Kardar]V.2-C.3-散射和涨落</a><time datetime="2024-04-24T16:55:05.000Z" title="发表于 2024-04-25 00:55:05">2024-04-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/Kardar/%5BKardar%5DV.2-C.2-%E7%BB%9F%E8%AE%A1%E5%9C%BA.html" title="[Kardar]V.2-C.2-统计场"><img src="/img/Mtheory.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[Kardar]V.2-C.2-统计场"/></a><div class="content"><a class="title" href="/post/Kardar/%5BKardar%5DV.2-C.2-%E7%BB%9F%E8%AE%A1%E5%9C%BA.html" title="[Kardar]V.2-C.2-统计场">[Kardar]V.2-C.2-统计场</a><time datetime="2024-04-23T11:27:50.000Z" title="发表于 2024-04-23 19:27:50">2024-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/Kardar/%5BKardar%5DV.2-C.1-%E9%9B%86%E7%BE%A4%E8%A1%8C%E4%B8%BA%EF%BC%8C%E4%BB%8E%E7%B2%92%E5%AD%90%E5%88%B0%E5%9C%BA.html" title="[Kardar]V.2-C.1-集群行为，从粒子到场"><img src="/img/Mtheory.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[Kardar]V.2-C.1-集群行为，从粒子到场"/></a><div class="content"><a class="title" href="/post/Kardar/%5BKardar%5DV.2-C.1-%E9%9B%86%E7%BE%A4%E8%A1%8C%E4%B8%BA%EF%BC%8C%E4%BB%8E%E7%B2%92%E5%AD%90%E5%88%B0%E5%9C%BA.html" title="[Kardar]V.2-C.1-集群行为，从粒子到场">[Kardar]V.2-C.1-集群行为，从粒子到场</a><time datetime="2024-04-21T23:32:40.000Z" title="发表于 2024-04-22 07:32:40">2024-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/Kardar/%5BKardar%5DV.1-C.3-%E6%B0%94%E4%BD%93%E5%8A%A8%E7%90%86%E8%AE%BA.html" title="kardar3">kardar3</a><time datetime="2024-04-18T15:03:34.000Z" title="发表于 2024-04-18 23:03:34">2024-04-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Papaya Z</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">See as much as possible, go as far as could.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
 
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
 
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
-  const initGitalk = () => {
-    const gitalk = new Gitalk(Object.assign({
-      clientID: '',
-      clientSecret: '',
-      repo: '',
-      owner: '',
-      admin: [''],
-      id: '272b4106712a970d11f9bf897ac19cdb',
-      updateCountCallback: commentCount
-    },null))
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 3px;
+        }
 
-    gitalk.render('gitalk-container')
-  }
+        /* Selection */
+        ::selection {
+            background: rgba(56, 152, 236, 0.3);
+            color: #ffffff;
+        }
 
-  const loadGitalk = async() => {
-    if (typeof Gitalk === 'function') initGitalk()
-    else {
-      await getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
-      await getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
-      initGitalk()
-    }
-  }
-  
-  const commentCount = n => {
-    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
-    if (isCommentCount) {
-      isCommentCount.textContent= n
-    }
-  }
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
 
-  if ('Gitalk' === 'Gitalk' || !false) {
-    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
-    else loadGitalk()
-  } else {
-    window.loadOtherComment = loadGitalk
-  }
-})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
-POWERMODE.shake = false;
-POWERMODE.mobile = false;
-document.body.addEventListener('input', POWERMODE);
-</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.5s;
+            padding: 0 2rem;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav .logo svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-blue);
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        nav .logo span {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        nav .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav .nav-links a:hover {
+            color: white;
+        }
+
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.3s;
+        }
+
+        nav .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #hero .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: -2px;
+        }
+
+        #hero .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        #hero .subtitle span {
+            color: var(--accent-blue);
+        }
+
+        #hero .subtitle .divider {
+            margin: 0 1rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        #hero .subtitle .highlight-purple {
+            color: var(--accent-purple);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(56, 152, 236, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .gradient-overlay-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, black, transparent);
+            z-index: 5;
+        }
+
+        .gradient-overlay-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, black, transparent);
+            z-index: 5;
+        }
+
+        /* About Section */
+        #about {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(56, 152, 236, 0.2), rgba(123, 97, 255, 0.2));
+            z-index: 1;
+        }
+
+        .about-image .deco-square {
+            position: absolute;
+            bottom: -1rem;
+            right: -1rem;
+            width: 6rem;
+            height: 6rem;
+            border: 2px solid var(--accent-blue);
+            border-radius: 0.5rem;
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .about-image .deco-circle {
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+            width: 4rem;
+            height: 4rem;
+            border: 2px solid var(--accent-purple);
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .about-content {
+            space-y: 1.5rem;
+        }
+
+        .about-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-content .highlight {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .about-content .highlight-purple {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(34, 34, 34, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 152, 236, 0.3);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card svg {
+            width: 2rem;
+            height: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .stat-card:hover svg {
+            color: var(--accent-purple);
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Research Section */
+        #research {
+            padding: 6rem 2rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .research-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(34, 34, 34, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 152, 236, 0.3);
+        }
+
+        .research-card .icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .research-card:hover .icon-wrapper {
+            transform: scale(1.1);
+        }
+
+        .research-card svg {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .research-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .research-card .glow {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        .research-card:hover .glow {
+            opacity: 1;
+        }
+
+        .research-card .corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5rem;
+            height: 5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .research-card:hover .corner {
+            opacity: 1;
+        }
+
+        /* Tech Stack Section */
+        #tech {
+            padding: 6rem 2rem;
+        }
+
+        .tech-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .tech-tag {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tech-tag.dimmed {
+            opacity: 0.2;
+        }
+
+        .tech-tag-inner {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 2px solid;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover .tech-tag-inner {
+            transform: scale(1.1);
+        }
+
+        .tech-level {
+            position: absolute;
+            bottom: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .tech-tag:hover .tech-level {
+            opacity: 1;
+        }
+
+        .tech-level-text {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-level-bar {
+            width: 6rem;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .tech-level-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.5s;
+        }
+
+        /* Publications Section */
+        #publications {
+            padding: 6rem 2rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(34, 34, 34, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-box svg {
+            width: 2rem;
+            height: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .stat-box:hover svg {
+            color: var(--accent-purple);
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-box .label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.25rem;
+        }
+
+        .pub-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pub-list h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .pub-item {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(34, 34, 34, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .pub-item:hover {
+            border-color: rgba(56, 152, 236, 0.3);
+        }
+
+        .pub-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .pub-item:hover h4 {
+            color: var(--accent-blue);
+        }
+
+        .pub-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .pub-meta .journal {
+            color: var(--accent-purple);
+        }
+
+        .pub-citations {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            font-size: 0.85rem;
+        }
+
+        .pub-citations svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--accent-pink);
+        }
+
+        .pub-citations .count {
+            color: var(--accent-pink);
+            font-weight: 700;
+        }
+
+        .pub-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.5s;
+        }
+
+        .pub-item:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 6rem 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .contact-form {
+            space-y: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(56, 152, 236, 0.2);
+        }
+
+        .form-group input[name="email"]:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.2);
+        }
+
+        .form-group textarea:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 2px rgba(255, 97, 220, 0.2);
+        }
+
+        .form-group textarea {
+            resize: none;
+            min-height: 140px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .contact-visual {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantum-visual {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.5s;
+        }
+
+        .particle-1 {
+            left: 25%;
+            background: radial-gradient(circle, var(--accent-blue), transparent);
+        }
+
+        .particle-2 {
+            right: 25%;
+            background: radial-gradient(circle, var(--accent-purple), transparent);
+        }
+
+        .energy-beam {
+            position: absolute;
+            left: 25%;
+            right: 25%;
+            top: 50%;
+            height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: all 0.5s;
+        }
+
+        .orbit-particle {
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent-pink);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            margin-left: -0.5rem;
+            margin-top: -0.5rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .orbit-particle.active {
+            opacity: 1;
+            animation: orbit1 2s linear infinite;
+        }
+
+        .orbit-particle.active:nth-child(4) {
+            animation: orbit2 2s linear infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes orbit1 {
+            from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+
+        @keyframes orbit2 {
+            from { transform: rotate(180deg) translateX(60px) rotate(-180deg); }
+            to { transform: rotate(540deg) translateX(60px) rotate(-540deg); }
+        }
+
+        .contact-info {
+            width: 100%;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .info-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--accent-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+
+        .social-link svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            footer .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-logo svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--accent-blue);
+        }
+
+        .footer-made {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-made svg {
+            width: 1rem;
+            height: 1rem;
+            color: var(--accent-pink);
+            fill: var(--accent-pink);
+        }
+
+        .footer-made .physics {
+            color: var(--accent-blue);
+        }
+
+        .footer-quote {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Roboto Mono', monospace;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .footer-quote {
+                display: block;
+            }
+        }
+
+        /* Background decorations */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+                </svg>
+                <span>zhangweiphys</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about">关于</a>
+                <a href="#research">研究</a>
+                <a href="#tech">技术</a>
+                <a href="#publications">成果</a>
+                <a href="#contact">联系</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <canvas id="particle-canvas"></canvas>
+        <div class="gradient-overlay-top"></div>
+        <div class="gradient-overlay-bottom"></div>
+        <div class="content">
+            <h1 class="font-mono" id="hero-title"></h1>
+            <p class="subtitle">
+                <span>物理学博士生</span>
+                <span class="divider">|</span>
+                <span class="highlight-purple">天体物理学家</span>
+            </p>
+            <a href="#about" class="btn-primary">探索研究</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="bg-glow" style="width: 400px; height: 400px; background: rgba(56, 152, 236, 0.1); top: 20%; left: -10%;"></div>
+        <div class="container">
+            <h2 class="section-title reveal">关于<span class="gradient-text">我</span></h2>
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop" alt="Researcher">
+                    <div class="deco-square"></div>
+                    <div class="deco-circle"></div>
+                </div>
+                <div class="about-content reveal-right">
+                    <p>
+                        我是一名<span class="highlight">物理学博士生</span>，
+                        专注于<span class="highlight-purple">计算天体物理学</span>。
+                        我的研究涉及模拟星系形成和黑洞吸积盘。
+                    </p>
+                    <p>
+                        通过高性能计算和先进的数值方法，我致力于揭示宇宙中最神秘现象背后的物理机制。
+                        从星系尺度的结构形成，到黑洞周围的极端物理环境，每一个模拟都是一次探索未知的旅程。
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+                            </svg>
+                            <div class="value">5年+</div>
+                            <div class="label">模拟经验</div>
+                        </div>
+                        <div class="stat-card">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                            <div class="value">Python & C++</div>
+                            <div class="label">编程语言</div>
+                        </div>
+                        <div class="stat-card">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                            <div class="value">10+</div>
+                            <div class="label">发表论文</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="bg-glow" style="width: 300px; height: 300px; background: rgba(123, 97, 255, 0.1); top: 30%; right: 0;"></div>
+        <div class="bg-glow" style="width: 300px; height: 300px; background: rgba(56, 152, 236, 0.1); bottom: 20%; left: 0;"></div>
+        <div class="container">
+            <h2 class="section-title reveal">研究<span class="gradient-text">领域</span></h2>
+            <p class="section-subtitle reveal">探索宇宙的奥秘，从星系尺度到黑洞视界</p>
+            <div class="research-grid">
+                <div class="research-card reveal" style="--card-color: #3898ec;">
+                    <div class="icon-wrapper" style="background: rgba(56, 152, 236, 0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #3898ec;">星系形成</h3>
+                    <p>通过大规模数值模拟研究星系从暗物质晕中的形成与演化过程，探索恒星形成与反馈机制。</p>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, rgba(56, 152, 236, 0.1), transparent 70%);"></div>
+                    <div class="corner" style="background: linear-gradient(135deg, transparent 50%, rgba(56, 152, 236, 0.2) 50%);"></div>
+                </div>
+                <div class="research-card reveal" style="--card-color: #7b61ff;">
+                    <div class="icon-wrapper" style="background: rgba(123, 97, 255, 0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#7b61ff" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #7b61ff;">黑洞物理</h3>
+                    <p>研究超大质量黑洞的吸积过程、喷流形成机制，以及黑洞与宿主星系的协同演化关系。</p>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, rgba(123, 97, 255, 0.1), transparent 70%);"></div>
+                    <div class="corner" style="background: linear-gradient(135deg, transparent 50%, rgba(123, 97, 255, 0.2) 50%);"></div>
+                </div>
+                <div class="research-card reveal" style="--card-color: #ff61dc;">
+                    <div class="icon-wrapper" style="background: rgba(255, 97, 220, 0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ff61dc" stroke-width="2">
+                            <path d="M2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10"/>
+                            <path d="M12 2c5.5 0 10 4.5 10 10"/>
+                            <path d="M12 12l-4-4M12 12l4-4M12 12v6"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #ff61dc;">宇宙流体动力学</h3>
+                    <p>开发高精度流体动力学模拟代码，研究宇宙中的激波、湍流和磁流体动力学过程。</p>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, rgba(255, 97, 220, 0.1), transparent 70%);"></div>
+                    <div class="corner" style="background: linear-gradient(135deg, transparent 50%, rgba(255, 97, 220, 0.2) 50%);"></div>
+                </div>
+                <div class="research-card reveal" style="--card-color: #3898ec;">
+                    <div class="icon-wrapper" style="background: rgba(56, 152, 236, 0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#3898ec" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <rect x="9" y="9" width="6" height="6"/>
+                            <path d="M15 2v2M15 20v2M2 15h2M20 15h2"/>
+                        </svg>
+                    </div>
+                    <h3 style="color: #3898ec;">高性能计算</h3>
+                    <p>优化并行算法，利用GPU加速和分布式计算技术，实现超大规模宇宙学模拟。</p>
+                    <div class="glow" style="background: radial-gradient(circle at 50% 50%, rgba(56, 152, 236, 0.1), transparent 70%);"></div>
+                    <div class="corner" style="background: linear-gradient(135deg, transparent 50%, rgba(56, 152, 236, 0.2) 50%);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech">
+        <div class="bg-glow" style="width: 600px; height: 600px; background: radial-gradient(circle, rgba(56, 152, 236, 0.05), transparent); top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <h2 class="section-title reveal">技术<span class="gradient-text">栈</span></h2>
+            <p class="section-subtitle reveal">构建宇宙模拟的工具与技能</p>
+            <div class="tech-cloud" id="tech-cloud">
+                <!-- Tech tags will be generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="bg-glow" style="width: 400px; height: 400px; background: rgba(56, 152, 236, 0.1); top: 20%; right: -10%;"></div>
+        <div class="bg-glow" style="width: 400px; height: 400px; background: rgba(123, 97, 255, 0.1); bottom: 20%; left: -10%;"></div>
+        <div class="container">
+            <h2 class="section-title reveal">研究<span class="gradient-text">成果</span></h2>
+            <p class="section-subtitle reveal">学术贡献与发表记录</p>
+            
+            <div class="stats-row">
+                <div class="stat-box reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <div class="number" data-target="15">0</div>
+                    <div class="label">发表论文</div>
+                </div>
+                <div class="stat-box reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    <div class="number" data-target="500">0</div>
+                    <div class="label">被引次数</div>
+                </div>
+                <div class="stat-box reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    <div class="number" data-target="12">0</div>
+                    <div class="label">h-index</div>
+                </div>
+                <div class="stat-box reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="7"/>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                    </svg>
+                    <div class="number" data-target="3">0</div>
+                    <div class="label">学术奖项</div>
+                </div>
+            </div>
+
+            <div class="pub-list">
+                <h3>代表性论文</h3>
+                <div class="pub-item reveal">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="flex: 1;">
+                            <h4>The Role of Feedback in Galaxy Formation</h4>
+                            <div class="pub-meta">
+                                <span class="journal">The Astrophysical Journal</span>
+                                <span>•</span>
+                                <span>2024</span>
+                            </div>
+                        </div>
+                        <div class="pub-citations">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            <span>被引</span>
+                            <span class="count">45</span>
+                            <span>次</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-item reveal">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="flex: 1;">
+                            <h4>Black Hole Accretion Disk Simulations with GPU Acceleration</h4>
+                            <div class="pub-meta">
+                                <span class="journal">Monthly Notices of the Royal Astronomical Society</span>
+                                <span>•</span>
+                                <span>2023</span>
+                            </div>
+                        </div>
+                        <div class="pub-citations">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            <span>被引</span>
+                            <span class="count">78</span>
+                            <span>次</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-item reveal">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="flex: 1;">
+                            <h4>Cosmological Hydrodynamical Simulations: Methods and Applications</h4>
+                            <div class="pub-meta">
+                                <span class="journal">Nature Astronomy</span>
+                                <span>•</span>
+                                <span>2023</span>
+                            </div>
+                        </div>
+                        <div class="pub-citations">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            <span>被引</span>
+                            <span class="count">120</span>
+                            <span>次</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pub-item reveal">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="flex: 1;">
+                            <h4>Turbulence in the Interstellar Medium: A Numerical Study</h4>
+                            <div class="pub-meta">
+                                <span class="journal">The Astrophysical Journal Letters</span>
+                                <span>•</span>
+                                <span>2022</span>
+                            </div>
+                        </div>
+                        <div class="pub-citations">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                            <span>被引</span>
+                            <span class="count">56</span>
+                            <span>次</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="bg-glow" style="width: 300px; height: 300px; background: rgba(56, 152, 236, 0.1); top: 30%; left: 10%;"></div>
+        <div class="bg-glow" style="width: 300px; height: 300px; background: rgba(123, 97, 255, 0.1); bottom: 30%; right: 10%;"></div>
+        <div class="container">
+            <h2 class="section-title reveal">联系<span class="gradient-text">我</span></h2>
+            <p class="section-subtitle reveal">开启学术合作，探索宇宙奥秘</p>
+            
+            <div class="contact-grid">
+                <form class="contact-form reveal-left" id="contact-form">
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input type="text" name="name" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱</label>
+                        <input type="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>消息</label>
+                        <textarea name="message" placeholder="写下您的消息..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary btn-submit">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9"/>
+                        </svg>
+                        发送消息
+                    </button>
+                </form>
+
+                <div class="contact-visual reveal-right">
+                    <div class="quantum-visual">
+                        <div class="particle particle-1" id="particle1"></div>
+                        <div class="particle particle-2" id="particle2"></div>
+                        <div class="energy-beam" id="energyBeam"></div>
+                        <div class="orbit-particle" id="orbit1"></div>
+                        <div class="orbit-particle" id="orbit2"></div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>某大学物理系，天体物理研究中心</span>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://github.com/zhangweiphys" target="_blank" class="social-link" style="background: rgba(56, 152, 236, 0.2); border: 1px solid rgba(56, 152, 236, 0.4);">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="color: #3898ec;">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" style="background: rgba(123, 97, 255, 0.2); border: 1px solid rgba(123, 97, 255, 0.4);">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="color: #7b61ff;">
+                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:zhangwei@example.edu" class="social-link" style="background: rgba(255, 97, 220, 0.2); border: 1px solid rgba(255, 97, 220, 0.4);">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #ff61dc;">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+                </svg>
+                <span>zhangweiphys © 2024</span>
+            </div>
+            <div class="footer-made">
+                <span>Made with</span>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span>and</span>
+                <span class="physics">Physics</span>
+            </div>
+            <div class="footer-quote">
+                "The universe is under no obligation to make sense to us."
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // PARTICLE SYSTEM (Canvas)
+        // ==========================================
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        const particleCount = 150;
+        let mouse = { x: null, y: null };
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = this.getRandomColor();
+                this.angle = Math.random() * Math.PI * 2;
+                this.orbitRadius = Math.random() * 100 + 50;
+                this.orbitSpeed = (Math.random() - 0.5) * 0.02;
+                this.centerX = this.x;
+                this.centerY = this.y;
+            }
+
+            getRandomColor() {
+                const colors = ['#3898ec', '#7b61ff', '#ff61dc'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                // Orbit motion
+                this.angle += this.orbitSpeed;
+                this.centerX += this.speedX;
+                this.centerY += this.speedY;
+
+                // Mouse attraction
+                if (mouse.x != null && mouse.y != null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 200) {
+                        const force = (200 - distance) / 200;
+                        this.x += dx * force * 0.02;
+                        this.y += dy * force * 0.02;
+                    }
+                }
+
+                // Apply orbit
+                this.x = this.centerX + Math.cos(this.angle) * this.orbitRadius * 0.3;
+                this.y = this.centerY + Math.sin(this.angle) * this.orbitRadius * 0.3;
+
+                // Boundary check
+                if (this.centerX < 0 || this.centerX > canvas.width) this.speedX *= -1;
+                if (this.centerY < 0 || this.centerY > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawGrid() {
+            const gridSize = 50;
+            ctx.strokeStyle = 'rgba(56, 152, 236, 0.1)';
+            ctx.lineWidth = 1;
+            ctx.shadowBlur = 0;
+
+            // Vertical lines
+            for (let x = 0; x <= canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Horizontal lines
+            for (let y = 0; y <= canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        function drawConnections() {
+            ctx.shadowBlur = 0;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(56, 152, 236, ${0.2 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawGrid();
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            drawConnections();
+
+            animationId = requestAnimationFrame(animateParticles);
+        }
+
+        // Mouse tracking
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        // Initialize
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+        // ==========================================
+        // TEXT DECODE ANIMATION
+        // ==========================================
+        const heroTitle = document.getElementById('hero-title');
+        const fullText = 'zhangweiphys';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        let iteration = 0;
+
+        function decodeText() {
+            const interval = setInterval(() => {
+                heroTitle.textContent = fullText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < iteration / 3) {
+                            return fullText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join('');
+
+                iteration++;
+
+                if (iteration >= fullText.length * 3) {
+                    clearInterval(interval);
+                    heroTitle.textContent = fullText;
+                }
+            }, 50);
+        }
+
+        // Start decode animation
+        setTimeout(decodeText, 300);
+
+        // ==========================================
+        // GSAP SCROLL ANIMATIONS
+        // ==========================================
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navigation scroll effect
+        ScrollTrigger.create({
+            start: 'top -100',
+            onUpdate: (self) => {
+                const navbar = document.getElementById('navbar');
+                if (self.direction === 1 && self.scroll() > 100) {
+                    navbar.classList.add('scrolled');
+                } else if (self.scroll() < 100) {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // Reveal animations
+        gsap.utils.toArray('.reveal').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.reveal-left').forEach((elem) => {
+            gsap.fromTo(elem,
+                { opacity: 0, x: -50 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.reveal-right').forEach((elem) => {
+            gsap.fromTo(elem,
+                { opacity: 0, x: 50 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Number counting animation
+        gsap.utils.toArray('.number').forEach((elem) => {
+            const target = parseInt(elem.dataset.target);
+            
+            ScrollTrigger.create({
+                trigger: elem,
+                start: 'top 80%',
+                onEnter: () => {
+                    gsap.to({ value: 0 }, {
+                        value: target,
+                        duration: 2,
+                        ease: 'power2.out',
+                        onUpdate: function() {
+                            elem.textContent = Math.round(this.targets()[0].value) + (target >= 100 ? '+' : '');
+                        }
+                    });
+                },
+                once: true
+            });
+        });
+
+        // ==========================================
+        // TECH STACK
+        // ==========================================
+        const technologies = [
+            { name: 'Python', level: 95, color: '#3898ec' },
+            { name: 'C++', level: 90, color: '#7b61ff' },
+            { name: 'CUDA', level: 85, color: '#ff61dc' },
+            { name: 'MPI', level: 80, color: '#3898ec' },
+            { name: 'NumPy', level: 95, color: '#7b61ff' },
+            { name: 'SciPy', level: 90, color: '#ff61dc' },
+            { name: 'Matplotlib', level: 88, color: '#3898ec' },
+            { name: 'Linux', level: 92, color: '#7b61ff' },
+            { name: 'LaTeX', level: 85, color: '#ff61dc' },
+            { name: 'Git', level: 88, color: '#3898ec' },
+            { name: 'Docker', level: 75, color: '#7b61ff' },
+            { name: 'TensorFlow', level: 70, color: '#ff61dc' },
+        ];
+
+        const techCloud = document.getElementById('tech-cloud');
+        
+        technologies.forEach((tech, index) => {
+            const tag = document.createElement('div');
+            tag.className = 'tech-tag';
+            tag.innerHTML = `
+                <div class="tech-tag-inner" style="border-color: ${tech.color}; background: ${tech.color}10; color: ${tech.color};">
+                    ${tech.name}
+                </div>
+                <div class="tech-level">
+                    <div class="tech-level-text">熟练度</div>
+                    <div class="tech-level-bar">
+                        <div class="tech-level-fill" style="width: ${tech.level}%; background: ${tech.color};"></div>
+                    </div>
+                </div>
+            `;
+            techCloud.appendChild(tag);
+        });
+
+        // ==========================================
+        // QUANTUM FORM EFFECTS
+        // ==========================================
+        const contactForm = document.getElementById('contact-form');
+        const particle1 = document.getElementById('particle1');
+        const particle2 = document.getElementById('particle2');
+        const energyBeam = document.getElementById('energyBeam');
+        const orbit1 = document.getElementById('orbit1');
+        const orbit2 = document.getElementById('orbit2');
+
+        function updateQuantumVisuals() {
+            const name = contactForm.querySelector('[name="name"]').value;
+            const email = contactForm.querySelector('[name="email"]').value;
+            const message = contactForm.querySelector('[name="message"]').value;
+
+            const intensity = (name ? 0.3 : 0) + (email ? 0.3 : 0) + (message ? 0.4 : 0);
+
+            // Update particle glow
+            particle1.style.boxShadow = `0 0 ${20 + intensity * 30}px ${intensity > 0 ? '#3898ec' : 'transparent'}`;
+            particle1.style.opacity = 0.3 + intensity * 0.7;
+            
+            particle2.style.boxShadow = `0 0 ${20 + intensity * 30}px ${intensity > 0 ? '#7b61ff' : 'transparent'}`;
+            particle2.style.opacity = 0.3 + intensity * 0.7;
+
+            // Update energy beam
+            energyBeam.style.opacity = 0.2 + intensity * 0.8;
+            energyBeam.style.boxShadow = intensity > 0.5 ? `0 0 ${10 + intensity * 20}px #ff61dc` : 'none';
+
+            // Toggle orbit particles
+            if (intensity > 0.5) {
+                orbit1.classList.add('active');
+                orbit2.classList.add('active');
+            } else {
+                orbit1.classList.remove('active');
+                orbit2.classList.remove('active');
+            }
+        }
+
+        contactForm.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', updateQuantumVisuals);
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('.btn-submit');
+            btn.innerHTML = '发送成功!';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9"/>
+                    </svg>
+                    发送消息
+                `;
+                btn.disabled = false;
+                contactForm.reset();
+                updateQuantumVisuals();
+            }, 3000);
+        });
+
+        // ==========================================
+        // SMOOTH SCROLL FOR NAV LINKS
+        // ==========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Pause animation when tab is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationId);
+            } else {
+                animateParticles();
+            }
+        });
+    </script>
+</body>
+</html>
