@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>本地Agent下开发远程服务器项目配置实录 | zhangweiphys</title><meta name="author" content="Ustinian"><meta name="copyright" content="Ustinian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本地 AI Agent + 远程服务器 HPC：SSH + SSHFS 远程开发配置实录 场景：服务器是共享 HPC，不允许在上面安装 Claude Code &#x2F; Codex 等本地 AI 工具； 目标：在本地 Windows 上使用 AI Agent 修改、阅读、分析服务器上自己账号下的项目文件，而测试与计算作业仍在服务器上提交运行。   一、整体思路不折腾服务器（什么都不用装），只在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地Agent下开发远程服务器项目配置实录">
+<meta property="og:url" content="http://example.com/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/index.html">
+<meta property="og:site_name" content="zhangweiphys">
+<meta property="og:description" content="本地 AI Agent + 远程服务器 HPC：SSH + SSHFS 远程开发配置实录 场景：服务器是共享 HPC，不允许在上面安装 Claude Code &#x2F; Codex 等本地 AI 工具； 目标：在本地 Windows 上使用 AI Agent 修改、阅读、分析服务器上自己账号下的项目文件，而测试与计算作业仍在服务器上提交运行。   一、整体思路不折腾服务器（什么都不用装），只在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/default.jpg">
+<meta property="article:published_time" content="2026-08-06T15:18:36.000Z">
+<meta property="article:modified_time" content="2026-08-06T15:19:39.830Z">
+<meta property="article:author" content="Ustinian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/default.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "本地Agent下开发远程服务器项目配置实录",
+  "url": "http://example.com/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/",
+  "image": "http://example.com/img/default.jpg",
+  "datePublished": "2026-08-06T15:18:36.000Z",
+  "dateModified": "2026-08-06T15:19:39.830Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ustinian",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '本地Agent下开发远程服务器项目配置实录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/default.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">zhangweiphys</span></a><a class="nav-page-title" href="/"><span class="site-name">本地Agent下开发远程服务器项目配置实录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">本地Agent下开发远程服务器项目配置实录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-06T15:18:36.000Z" title="发表于 2026-08-06 23:18:36">2026-08-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-06T15:19:39.830Z" title="更新于 2026-08-06 23:19:39">2026-08-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="本地-AI-Agent-远程服务器-HPC：SSH-SSHFS-远程开发配置实录"><a href="#本地-AI-Agent-远程服务器-HPC：SSH-SSHFS-远程开发配置实录" class="headerlink" title="本地 AI Agent + 远程服务器 HPC：SSH + SSHFS 远程开发配置实录"></a>本地 AI Agent + 远程服务器 HPC：SSH + SSHFS 远程开发配置实录</h1><blockquote>
+<p><strong>场景</strong>：服务器是共享 HPC，不允许在上面安装 Claude Code &#x2F; Codex 等本地 AI 工具；</p>
+<p><strong>目标</strong>：在本地 Windows 上使用 AI Agent 修改、阅读、分析服务器上自己账号下的项目文件，而<strong>测试与计算作业仍在服务器上提交运行</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="一、整体思路"><a href="#一、整体思路" class="headerlink" title="一、整体思路"></a>一、整体思路</h2><p>不折腾服务器（什么都不用装），只在本地做两件事：</p>
+<ol>
+<li><strong>SSH 密钥免密</strong> —— 让 AI Agent 能静默调用 <code>ssh</code>（Agent 无法交互式输入密码）</li>
+<li><strong>SSHFS 挂载</strong> —— 把服务器上的项目文件夹”挂”成本地目录，AI Agent 的原生文件工具（Read &#x2F; Edit &#x2F; Write &#x2F; Grep &#x2F; Glob）直接编辑远程文件，改动<strong>实时写回服务器</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────┐   sshfs 挂载（文件实时读写）    ┌──────────────────────┐</span><br><span class="line">│  本地 WSL 环境       │ ◄══════════════════════════► │  远程 HPC 服务器      │</span><br><span class="line">│  Claude Code 等     │                              │  /home/you/projects/ │</span><br><span class="line">│                     │   ssh hpc &#x27;...&#x27;（执行命令）    │  [Slurm/PBS 调度器]  │</span><br><span class="line">└─────────────────────┘                              └──────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>分工原则</strong>：</p>
+<ul>
+<li><strong>文件编辑</strong> → 走挂载点（本地工具原生编辑，实时同步服务器）</li>
+<li><strong>执行计算</strong> → 走 <code>ssh hpc &#39;...&#39;</code>（提交、查队列、看日志都在服务器端）</li>
+</ul>
+<p>这样既不违反服务器”禁止安装软件”的规定，又享受本地 AI Agent 的完整能力。</p>
+<hr>
+<h2 id="二、第一步：SSH-免密配置（Windows-侧）"><a href="#二、第一步：SSH-免密配置（Windows-侧）" class="headerlink" title="二、第一步：SSH 免密配置（Windows 侧）"></a>二、第一步：SSH 免密配置（Windows 侧）</h2><h3 id="1-生成密钥对"><a href="#1-生成密钥对" class="headerlink" title="1. 生成密钥对"></a>1. 生成密钥对</h3><p>Windows 11 自带 OpenSSH，无需安装任何东西。PowerShell 中执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh<span class="literal">-keygen</span> <span class="literal">-t</span> ed25519 <span class="literal">-C</span> <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line"><span class="comment"># 一路回车即可，默认保存在 C:\Users\你的用户名\.ssh\</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-C &quot;注释&quot;</code> 只是给密钥加一个人可读的标签（方便日后辨认），<strong>可省略</strong>，也可以是任何字符串，对认证没有任何影响</li>
+<li>不要设置 passphrase（Agent 无法交互输入）</li>
+</ul>
+<h3 id="2-把公钥追加到服务器"><a href="#2-把公钥追加到服务器" class="headerlink" title="2. 把公钥追加到服务器"></a>2. 把公钥追加到服务器</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-Content</span> <span class="variable">$env:USERPROFILE</span>\.ssh\id_ed25519.pub | ssh 用户<span class="selector-tag">@</span>服务器IP <span class="string">&quot;mkdir -p ~/.ssh &amp;&amp; chmod 700 ~/.ssh &amp;&amp; touch ~/.ssh/authorized_keys &amp;&amp; chmod 600 ~/.ssh/authorized_keys &amp;&amp; printf &#x27;\n&#x27; &gt;&gt; ~/.ssh/authorized_keys &amp;&amp; tr -d &#x27;\r&#x27; &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>要点：</p>
+<ul>
+<li><code>&gt;&gt;</code> 是<strong>追加</strong>（append）不是覆盖——服务器上已有的 key 原样保留，新 key 加在末尾</li>
+<li><code>tr -d &#39;\r&#39;</code> <strong>必须有</strong>：PowerShell 往 <code>ssh.exe</code> 管道传数据时，会自动注入 Windows 换行符 <code>\r</code>，不删掉的话服务器上会出现 <code>^M</code> 脏字符（即 <code>\r</code>，CRLF 的一部分）</li>
+<li>万一公钥已经被写脏了，在服务器上执行修复：<code>sed -i &#39;s/\r$//&#39; ~/.ssh/authorized_keys</code></li>
+</ul>
+<h3 id="3-验证"><a href="#3-验证" class="headerlink" title="3. 验证"></a>3. 验证</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh 用户@服务器IP</span><br></pre></td></tr></table></figure>
+
+<p>直接登入、无需密码 &#x3D; 配置成功。</p>
+<hr>
+<h2 id="三、第二步：SSH-config-别名（强烈推荐）"><a href="#三、第二步：SSH-config-别名（强烈推荐）" class="headerlink" title="三、第二步：SSH config 别名（强烈推荐）"></a>三、第二步：SSH config 别名（强烈推荐）</h2><p>编辑本地 <code>C:\Users\你的用户名\.ssh\config</code>（没有就新建），加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host hpc</span><br><span class="line">  HostName 服务器IP或域名</span><br><span class="line">  User 你的用户名</span><br><span class="line">  IdentityFile ~/.ssh/id_ed25519</span><br><span class="line">  ServerAliveInterval 60</span><br><span class="line">  StrictHostKeyChecking accept-new</span><br></pre></td></tr></table></figure>
+
+<p>之后所有命令用 <code>hpc</code> 别名（也可以自定义其他别名）即可，不用再记 IP 和用户名。</p>
+<ul>
+<li><code>ServerAliveInterval 60</code>：长时间操作防断连</li>
+<li>用 <code>accept-new</code> 而<strong>不是</strong>网上常见的 <code>no</code>：首次连接自动记录服务器指纹，之后指纹若变化会报警提示，更安全</li>
+</ul>
+<hr>
+<h2 id="四、第三步：WSL-挂载（推荐方案）"><a href="#四、第三步：WSL-挂载（推荐方案）" class="headerlink" title="四、第三步：WSL 挂载（推荐方案）"></a>四、第三步：WSL 挂载（推荐方案）</h2><blockquote>
+<p><strong>为什么用 WSL？</strong> WSL2 的 sshfs 走 Linux FUSE，稳定可靠，且不需要管理员权限（对比 Windows 原生方案 rclone + WinFsp 需要装驱动）。前提是你装好了 WSL2（如 Ubuntu 24.04）。</p>
+</blockquote>
+<h3 id="1-进入-WSL，安装-sshfs"><a href="#1-进入-WSL，安装-sshfs" class="headerlink" title="1. 进入 WSL，安装 sshfs"></a>1. 进入 WSL，安装 sshfs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl    <span class="comment"># 从 PowerShell 进入 WSL</span></span><br><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt install -y sshfs</span><br></pre></td></tr></table></figure>
+
+<p><code>apt install</code> 是<strong>全局安装</strong>（整个 WSL 系统共享），一次安装，<strong>在任意目录执行都可以</strong>。</p>
+<h3 id="2-把-Windows-的密钥和-config-复制进-WSL（关键！）"><a href="#2-把-Windows-的密钥和-config-复制进-WSL（关键！）" class="headerlink" title="2. 把 Windows 的密钥和 config 复制进 WSL（关键！）"></a>2. 把 Windows 的密钥和 config 复制进 WSL（关键！）</h3><p>WSL 是独立 Linux 系统，<strong>不共享</strong> Windows 的 <code>~/.ssh/</code>，必须复制一份：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.ssh &amp;&amp; <span class="built_in">chmod</span> 700 ~/.ssh</span><br><span class="line"><span class="built_in">cp</span> /mnt/c/Users/你的用户名/.ssh/id_ed25519      ~/.ssh/</span><br><span class="line"><span class="built_in">cp</span> /mnt/c/Users/你的用户名/.ssh/id_ed25519.pub  ~/.ssh/</span><br><span class="line"><span class="built_in">cp</span> /mnt/c/Users/你的用户名/.ssh/config          ~/.ssh/</span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/id_ed25519 ~/.ssh/config</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果不复制，WSL 里 <code>ssh hpc</code> 会报 <code>Could not resolve hostname hpc</code>——因为 <code>hpc</code> 别名定义在 Windows 的 config 里，WSL 看不到。</p>
+</blockquote>
+<h3 id="3-验证-WSL-内免密"><a href="#3-验证-WSL-内免密" class="headerlink" title="3. 验证 WSL 内免密"></a>3. 验证 WSL 内免密</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh hpc <span class="string">&#x27;hostname&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>能返回服务器主机名即成功。</p>
+<h3 id="4-建挂载点并挂载"><a href="#4-建挂载点并挂载" class="headerlink" title="4. 建挂载点并挂载"></a>4. 建挂载点并挂载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/myserver</span><br><span class="line">sshfs hpc:/home/你的用户名/projects/项目名 ~/myserver -o reconnect,ServerAliveInterval=60</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂载点<strong>必须建在 WSL home（<code>~/</code>）下</strong>（WSL 原生 ext4 文件系统）；<strong>不要</strong>建在 <code>/mnt/c/...</code>（Windows 盘映射）下，会出权限&#x2F;性能问题</li>
+<li><code>-o reconnect</code>：网络抖动自动重连，长会话更稳</li>
+<li>**只挂”代码那一层”**：如果项目里有几十 G 的 <code>data/</code>、<code>output/</code> 等大目录，建议挂更细的子目录，避免 Agent 的 Grep&#x2F;Glob 去扫大目录（慢且烧 token）。挂载大目录不会占本地磁盘（见下文原理），但扫描会慢</li>
+</ul>
+<h3 id="5-启动-Agent-干活"><a href="#5-启动-Agent-干活" class="headerlink" title="5. 启动 Agent 干活"></a>5. 启动 Agent 干活</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/myserver</span><br><span class="line">claude</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-卸载挂载"><a href="#6-卸载挂载" class="headerlink" title="6. 卸载挂载"></a>6. 卸载挂载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fusermount -u ~/myserver</span><br></pre></td></tr></table></figure>
+
+<p>用完即卸，要用再挂。</p>
+<hr>
+<h2 id="五、原理：挂载-≠-下载"><a href="#五、原理：挂载-≠-下载" class="headerlink" title="五、原理：挂载 ≠ 下载"></a>五、原理：挂载 ≠ 下载</h2><p>这是很多人会担心的问题：<strong>挂载远程 100G 的数据目录，会不会把本地硬盘撑爆？</strong></p>
+<p><strong>不会。sshfs 是网络文件系统（network filesystem），不是同步&#x2F;下载工具。</strong></p>
+<ul>
+<li><strong>服务器是唯一的数据源</strong>。挂载后，本地不保存任何文件内容</li>
+<li>程序读取文件时，只有正在读的那一小段字节经网络流进内存，用完即弃，<strong>不落盘</strong></li>
+<li>挂载一个 100GB 的远程目录，本地磁盘占用 ≈ <strong>0</strong></li>
+<li>WSL 的虚拟磁盘（<code>ext4.vhdx</code>）<strong>不会因为远程数据变大</strong>；只有你主动 <code>scp</code> &#x2F; <code>cp</code> 把文件拷进 WSL 内部才会占用</li>
+</ul>
+<p>可以实测验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h ~/myserver   <span class="comment"># 显示的是服务器文件系统的容量（几百 G 那种）</span></span><br><span class="line"><span class="built_in">df</span> -h ~            <span class="comment"># 显示的是 WSL 本地文件系统的容量，并没有多出远程那几十 G</span></span><br></pre></td></tr></table></figure>
+
+<p>一个直观比喻：</p>
+<blockquote>
+<p>sshfs 是一个”翻译官”。当本地程序访问 <code>~/myserver/xxx</code> 时，它把请求翻译成一条 SFTP 指令发给服务器，<strong>服务器在自己硬盘上完成真正的读写</strong>，再把结果流回来。所以挂载点是一扇”实时窗口”或”远程遥控器”——你在窗口里新建文件，服务器上立刻出现；服务器上删了，窗口里立刻消失。<strong>没有同步过程、没有副本、没有重复占用。</strong></p>
+</blockquote>
+<p>对比：<code>scp</code> &#x2F; <code>rsync</code> &#x2F; 网盘是”复制一份过去”（占本地空间）；sshfs 是”遥控”（只占一条 SSH 连接）。</p>
+<p>⚠️ <strong>注意</strong>：在挂载点上跑 <code>du -sh</code> 会把远程目录树全部遍历一遍（每个 stat 都是网络往返），很慢。看目录大小请在服务器端执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh hpc <span class="string">&#x27;du -sh /home/你的用户名/projects/项目名/*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、给-Agent-的”工作规范”：CLAUDE-md"><a href="#六、给-Agent-的”工作规范”：CLAUDE-md" class="headerlink" title="六、给 Agent 的”工作规范”：CLAUDE.md"></a>六、给 Agent 的”工作规范”：CLAUDE.md</h2><p>把 <code>CLAUDE.md</code> 放在挂载点根目录（即服务器项目根目录），Claude Code 每次在该目录启动会自动读取。注意：由于挂载点的文件就”长”在服务器上，这个文件会被实时写到服务器项目里，这是正常的。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 远程 HPC 项目工作规范</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 架构</span></span><br><span class="line"><span class="bullet">-</span> 本机：WSL (Ubuntu) 跑 Claude Code；远程：学校 HPC（Slurm 调度）</span><br><span class="line"><span class="bullet">-</span> 挂载点：~/myserver = 远程 /home/<span class="language-xml"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span>/projects/&lt;项目名&gt;</span><br><span class="line"><span class="bullet">-</span> SSH 别名：hpc（远程用户 <span class="language-xml"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span>）</span><br><span class="line"></span><br><span class="line"><span class="section">## 文件操作</span></span><br><span class="line"><span class="bullet">-</span> ~/myserver 是远程项目的实时挂载：Read/Edit/Write/Grep/Glob 直接操作，改动实时同步到服务器</span><br><span class="line"><span class="bullet">-</span> 禁止把大文件（data、results 等目录）复制到本地</span><br><span class="line"></span><br><span class="line"><span class="section">## 执行（一律走 ssh，本地不跑项目代码）</span></span><br><span class="line">统一格式，单引号包裹（让 $USER 等变量在远程展开）：</span><br><span class="line">  ssh hpc &#x27;cd /home/<span class="language-xml"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span>/projects/&lt;项目名&gt; &amp;&amp; &lt;命令&gt;&#x27;</span><br><span class="line"></span><br><span class="line"><span class="section">## Slurm</span></span><br><span class="line"><span class="bullet">-</span> 提交：ssh hpc &#x27;cd /home/<span class="language-xml"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span>/projects/&lt;项目名&gt; &amp;&amp; sbatch &lt;脚本&gt;&#x27;</span><br><span class="line"><span class="bullet">-</span> 队列：ssh hpc &#x27;squeue -u <span class="language-xml"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span>&#x27;</span><br><span class="line"><span class="bullet">-</span> 取消：ssh hpc &#x27;scancel <span class="language-xml"><span class="tag">&lt;<span class="name">jobid</span>&gt;</span></span>&#x27;</span><br><span class="line"><span class="bullet">-</span> 历史：ssh hpc &#x27;sacct -j <span class="language-xml"><span class="tag">&lt;<span class="name">jobid</span>&gt;</span></span> --format=JobID,State,Elapsed,MaxRSS,ExitCode&#x27;</span><br><span class="line"><span class="bullet">-</span> 日志：只读尾部 ssh hpc &#x27;tail -n 200 &lt;项目路径&gt;/slurm-<span class="language-xml"><span class="tag">&lt;<span class="name">jobid</span>&gt;</span></span>.out&#x27;，禁止 cat 整个大日志</span><br><span class="line"></span><br><span class="line"><span class="section">## 约束（重要）</span></span><br><span class="line"><span class="bullet">-</span> 禁止 rm -rf 类批量删除；删除前列出并等用户确认</span><br><span class="line"><span class="bullet">-</span> 大目录只读片段；看目录大小用服务器端 du：ssh hpc &#x27;du -sh &lt;目录&gt;&#x27;，不要在挂载点上跑 du</span><br><span class="line"><span class="bullet">-</span> 改 .slurm 脚本后，提交前把 #SBATCH 资源行和执行命令打印给用户过目</span><br><span class="line"><span class="bullet">-</span> 一次 ssh 只做一件事；只返回关键信息，避免全量输出</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、Slurm-日常命令速查"><a href="#七、Slurm-日常命令速查" class="headerlink" title="七、Slurm 日常命令速查"></a>七、Slurm 日常命令速查</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>提交作业</td>
+<td><code>ssh hpc &#39;cd 项目路径 &amp;&amp; sbatch run.slurm&#39;</code></td>
+</tr>
+<tr>
+<td>查看我的队列</td>
+<td><code>ssh hpc &#39;squeue -u 用户名&#39;</code></td>
+</tr>
+<tr>
+<td>取消作业</td>
+<td><code>ssh hpc &#39;scancel &lt;jobid&gt;&#39;</code></td>
+</tr>
+<tr>
+<td>作业历史&#x2F;资源用量</td>
+<td><code>ssh hpc &#39;sacct -j &lt;jobid&gt; --format=JobID,State,Elapsed,MaxRSS,ExitCode&#39;</code></td>
+</tr>
+<tr>
+<td>查看集群分区</td>
+<td><code>ssh hpc &#39;sinfo&#39;</code></td>
+</tr>
+<tr>
+<td>看作业日志</td>
+<td><code>ssh hpc &#39;tail -n 200 项目路径/slurm-&lt;jobid&gt;.out&#39;</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 不要让 Agent 使用 <code>srun --pty</code>（交互式会话，会卡住）；非交互测试用 <code>srun --job-name=test python -c &quot;...&quot;</code> 或直接 sbatch 一个小作业。</p>
+</blockquote>
+<hr>
+<h2 id="八、避坑清单"><a href="#八、避坑清单" class="headerlink" title="八、避坑清单"></a>八、避坑清单</h2><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PowerShell 注入 <code>\r</code>（服务器上出现 <code>^M</code>）</td>
+<td>追加公钥时用 <code>tr -d &#39;\r&#39;</code>；已写脏用 <code>sed -i &#39;s/\r$//&#39;</code></td>
+</tr>
+<tr>
+<td>WSL 里 <code>ssh hpc</code> 报 hostname 解析失败</td>
+<td>忘了把 Windows 的 <code>~/.ssh/config</code> 复制进 WSL（见第四步 2）</td>
+</tr>
+<tr>
+<td>本地&#x2F;服务器路径搞混</td>
+<td>挂载点 <code>~/myserver/xxx</code> &#x3D; 服务器 <code>/home/&lt;user&gt;/.../xxx</code>；<code>ssh hpc</code> 命令里一律用<strong>服务器路径</strong></td>
+</tr>
+<tr>
+<td>Agent 误删文件</td>
+<td>CLAUDE.md 写死：禁止 <code>rm -rf</code>，删除前确认（挂载里的操作就是直接在服务器上动真格的）</td>
+</tr>
+<tr>
+<td>大日志烧 token</td>
+<td>永远 <code>tail</code> 片段，禁止 <code>cat</code> 整个</td>
+</tr>
+<tr>
+<td>挂载点扫大目录很慢</td>
+<td>只挂代码子目录；目录大小用服务器端 <code>du</code></td>
+</tr>
+<tr>
+<td>误拷大数据进 WSL 导致 vhdx 变大</td>
+<td>不主动拷贝；如已发生，<code>wsl --shutdown</code> 后用 <code>diskpart</code> 的 <code>compact vdisk</code> 压缩回收</td>
+</tr>
+<tr>
+<td>多个公钥追加重复</td>
+<td>同一条 key 只追加一次</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、备选方案（一句话）"><a href="#九、备选方案（一句话）" class="headerlink" title="九、备选方案（一句话）"></a>九、备选方案（一句话）</h2><ul>
+<li><strong>Windows 原生挂载（不用 WSL）</strong>：rclone + WinFsp，需要管理员权限装驱动，配置稍繁琐</li>
+<li><strong>纯 SSH（不挂载）</strong>：本地建暂存目录，编辑用”scp 拉下来 → 改 → scp 推回去”，无同步心智负担的兜底方案，适合偶尔用</li>
+<li>本方案（WSL + sshfs）是体验最好的：原生编辑工具全可用、无需管理员、挂载稳定</li>
+</ul>
+<hr>
+<h2 id="十、冒烟测试（可选但推荐）"><a href="#十、冒烟测试（可选但推荐）" class="headerlink" title="十、冒烟测试（可选但推荐）"></a>十、冒烟测试（可选但推荐）</h2><ol>
+<li><code>ssh hpc &#39;hostname&#39;</code> —— 免密通</li>
+<li>挂载后读一个远程文件、改一行、写回、再读确认 —— 同步通</li>
+<li><code>ssh hpc &#39;cd 项目路径 &amp;&amp; sbatch 最小测试脚本&#39;</code> —— 提交通</li>
+<li><code>ssh hpc &#39;squeue -u 用户名&#39;</code> —— 队列通</li>
+<li>跑完后 <code>ssh hpc &#39;tail 项目路径/slurm-&lt;jobid&gt;.out&#39;</code> —— 日志通</li>
+</ol>
+<p>五步全过，就可以投入真实项目了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Ustinian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/">http://example.com/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">zhangweiphys</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/default.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/07/12/Git%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%E7%B2%BE%E7%AE%80%E9%80%9F%E6%9F%A5%E7%89%88/" title="Git用户手册精简版"><img class="cover" src="/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Git用户手册精简版</div></div><div class="info-2"><div class="info-item-1">Git 日常开发常用命令速查表以下按从克隆仓库 → 本地开发 → 提交同步的完整流程整理，覆盖日常高频使用场景，可直接复制留存。 一、仓库初始化与克隆   命令 含义 应用场合    git clone &lt;远程仓库地址&gt; 将远程仓库完整下载到本地，自动关联远端并命名为 origin 第一次拿到项目、从 Gitee&#x2F;GitHub 拉取代码到本地   git init 在当前文件夹初始化一个全新的本地 Git 仓库 本地从零新建项目，后续再关联远程仓库   二、远程仓库管理   命令 含义 应用场合    git remote -v 查看当前仓库关联的所有远程仓库地址（拉取&#x2F;推送地址） 确认项目绑定的是哪个远端仓库   git remote show origin 联网查询远程仓库详细信息：默认分支、分支追踪关系、实时同步状态 不执行 fetch 也能实时检查远端是否有更新   git remote add origin &lt;远程地址&gt; 给本地仓库添加远程仓库，别名设为 origin 本地 git init 新建项目后，绑定 Gitee&#x...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ustinian</div><div class="author-info-description">物理学博士生 | 激光等离子体物理</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zhangweiphys"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/zhangweiphys" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:weizhang10698@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0-AI-Agent-%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-HPC%EF%BC%9ASSH-SSHFS-%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">本地 AI Agent + 远程服务器 HPC：SSH + SSHFS 远程开发配置实录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">一、整体思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9ASSH-%E5%85%8D%E5%AF%86%E9%85%8D%E7%BD%AE%EF%BC%88Windows-%E4%BE%A7%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">二、第一步：SSH 免密配置（Windows 侧）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E5%AF%B9"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 生成密钥对</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8A%8A%E5%85%AC%E9%92%A5%E8%BF%BD%E5%8A%A0%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 把公钥追加到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9ASSH-config-%E5%88%AB%E5%90%8D%EF%BC%88%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">三、第二步：SSH config 别名（强烈推荐）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9AWSL-%E6%8C%82%E8%BD%BD%EF%BC%88%E6%8E%A8%E8%8D%90%E6%96%B9%E6%A1%88%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">四、第三步：WSL 挂载（推荐方案）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9B%E5%85%A5-WSL%EF%BC%8C%E5%AE%89%E8%A3%85-sshfs"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 进入 WSL，安装 sshfs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8A%8A-Windows-%E7%9A%84%E5%AF%86%E9%92%A5%E5%92%8C-config-%E5%A4%8D%E5%88%B6%E8%BF%9B-WSL%EF%BC%88%E5%85%B3%E9%94%AE%EF%BC%81%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 把 Windows 的密钥和 config 复制进 WSL（关键！）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81-WSL-%E5%86%85%E5%85%8D%E5%AF%86"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 验证 WSL 内免密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%BA%E6%8C%82%E8%BD%BD%E7%82%B9%E5%B9%B6%E6%8C%82%E8%BD%BD"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. 建挂载点并挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%90%AF%E5%8A%A8-Agent-%E5%B9%B2%E6%B4%BB"><span class="toc-number">1.4.5.</span> <span class="toc-text">5. 启动 Agent 干活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%8D%B8%E8%BD%BD%E6%8C%82%E8%BD%BD"><span class="toc-number">1.4.6.</span> <span class="toc-text">6. 卸载挂载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8E%9F%E7%90%86%EF%BC%9A%E6%8C%82%E8%BD%BD-%E2%89%A0-%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.5.</span> <span class="toc-text">五、原理：挂载 ≠ 下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%BB%99-Agent-%E7%9A%84%E2%80%9D%E5%B7%A5%E4%BD%9C%E8%A7%84%E8%8C%83%E2%80%9D%EF%BC%9ACLAUDE-md"><span class="toc-number">1.6.</span> <span class="toc-text">六、给 Agent 的”工作规范”：CLAUDE.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81Slurm-%E6%97%A5%E5%B8%B8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="toc-number">1.7.</span> <span class="toc-text">七、Slurm 日常命令速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E9%81%BF%E5%9D%91%E6%B8%85%E5%8D%95"><span class="toc-number">1.8.</span> <span class="toc-text">八、避坑清单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%A4%87%E9%80%89%E6%96%B9%E6%A1%88%EF%BC%88%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%89"><span class="toc-number">1.9.</span> <span class="toc-text">九、备选方案（一句话）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95%EF%BC%88%E5%8F%AF%E9%80%89%E4%BD%86%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.10.</span> <span class="toc-text">十、冒烟测试（可选但推荐）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/" title="本地Agent下开发远程服务器项目配置实录"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本地Agent下开发远程服务器项目配置实录"/></a><div class="content"><a class="title" href="/2026/08/06/%E6%9C%AC%E5%9C%B0Agent%E4%B8%8B%E5%BC%80%E5%8F%91%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%AE%9E%E5%BD%95/" title="本地Agent下开发远程服务器项目配置实录">本地Agent下开发远程服务器项目配置实录</a><time datetime="2026-08-06T15:18:36.000Z" title="发表于 2026-08-06 23:18:36">2026-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/12/Git%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%E7%B2%BE%E7%AE%80%E9%80%9F%E6%9F%A5%E7%89%88/" title="Git用户手册精简版"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git用户手册精简版"/></a><div class="content"><a class="title" href="/2026/07/12/Git%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%E7%B2%BE%E7%AE%80%E9%80%9F%E6%9F%A5%E7%89%88/" title="Git用户手册精简版">Git用户手册精简版</a><time datetime="2026-07-12T09:04:52.000Z" title="发表于 2026-07-12 17:04:52">2026-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/12/Windows%E4%B8%8B%E9%85%8D%E7%BD%AEWSL-VsCode%E8%BF%9B%E8%A1%8C%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%B6%85%E8%AF%A6%E7%BB%8F%E9%AA%8C%E8%B4%B4/" title="Windows下配置WSL+VsCode进行项目开发超详经验贴"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows下配置WSL+VsCode进行项目开发超详经验贴"/></a><div class="content"><a class="title" href="/2026/07/12/Windows%E4%B8%8B%E9%85%8D%E7%BD%AEWSL-VsCode%E8%BF%9B%E8%A1%8C%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%B6%85%E8%AF%A6%E7%BB%8F%E9%AA%8C%E8%B4%B4/" title="Windows下配置WSL+VsCode进行项目开发超详经验贴">Windows下配置WSL+VsCode进行项目开发超详经验贴</a><time datetime="2026-07-12T09:03:02.000Z" title="发表于 2026-07-12 17:03:02">2026-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/12/WSL2%E4%B8%AD%E9%83%A8%E7%BD%B2ClaudeCode%E8%B8%A9%E5%9D%91%E7%B2%BE%E7%AE%80%E7%89%88/" title="WSL2中部署ClaudeCode踩坑精简版"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="WSL2中部署ClaudeCode踩坑精简版"/></a><div class="content"><a class="title" href="/2026/07/12/WSL2%E4%B8%AD%E9%83%A8%E7%BD%B2ClaudeCode%E8%B8%A9%E5%9D%91%E7%B2%BE%E7%AE%80%E7%89%88/" title="WSL2中部署ClaudeCode踩坑精简版">WSL2中部署ClaudeCode踩坑精简版</a><time datetime="2026-07-12T08:59:07.000Z" title="发表于 2026-07-12 16:59:07">2026-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/08/knowledgeDeployGuide/" title="knowledgeDeployGuide"><img src="/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="knowledgeDeployGuide"/></a><div class="content"><a class="title" href="/2026/07/08/knowledgeDeployGuide/" title="knowledgeDeployGuide">knowledgeDeployGuide</a><time datetime="2026-07-08T08:24:03.000Z" title="发表于 2026-07-08 16:24:03">2026-07-08</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Ustinian</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
